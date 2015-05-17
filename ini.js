@@ -1,4 +1,4 @@
-
+exports.parseFile = parseFile
 exports.parse = exports.decode = decode
 exports.stringify = exports.encode = encode
 
@@ -187,4 +187,16 @@ function unsafe (val, doUnesc) {
     return unesc
   }
   return val
+}
+
+function parseFile(path_file,cb) {
+  fs = require('fs');
+  fs.exists(path_file, function (exists) {
+  	if (exists) {
+	  fs.readFile(path_file,'utf8', function (err, content) {
+		cb(decode(content));
+	  }); 
+	}
+  });
+  return;
 }
